@@ -151,6 +151,81 @@ if (_uid call isAdmin) then
 							};
 						};
 					};
+
+					_ct = cursorTarget;
+					if(!isNull _ct)then
+					{
+						if(getPlayerUID _ct != '')then
+						{
+							_cwep_ct = currentWeapon _ct;
+							_cammo_ct = _ct ammo _cwep_ct;
+							_cmags_ct = {currentMagazine _ct == _x} count magazines _ct;
+						
+							_log4 = format['%1 (%2) @%3',name _ct,getPlayerUID _ct,mapGridPosition _ct];
+							['<t align=''left'' size=''0.5'' color=''#B80B36''>'+_log4+'</t>',safezoneX+0.2,safezoneY+0.545,0.3,0,0,3036] spawn bis_fnc_dynamicText;
+							
+							_log5 = format['Health: %1  Distance: %2m',(1-(damage _ct))*100,round(cameraOn distance _ct)];
+							['<t align=''left'' size=''0.5'' color=''#B80B36''>'+_log5+'</t>',safezoneX+0.2,safezoneY+0.575,0.3,0,0,3037] spawn bis_fnc_dynamicText;
+						
+							_type = _cwep_ct;
+							_cfg = _type call fnc_getConfig;
+							_displayName = getText (configFile >> _cfg >> _type >> 'displayName');
+							_pic = getText (configFile >> _cfg >> _type >> 'picture');
+							_log6 = format[' %1 [%2] (%3/%4)',_displayName,_cwep_ct,_cammo_ct,_cmags_ct];
+							['
+							<img size=''0.75'' image='''+_pic+''' align=''left''/>
+							<t align=''left'' size=''0.5'' color=''#B80B36''>'+_log6+'</t>
+							',
+							safezoneX+0.2,safezoneY+0.605,0.3,0,0,3038] spawn bis_fnc_dynamicText;
+						}
+						else
+						{
+							_type = typeOf _ct;
+							_cfg = _type call fnc_getConfig;
+							_displayName = getText (configFile >> _cfg >> _type >> 'displayName');
+							_log4 = format['%1 [%2] @%3',_displayName,_type,mapGridPosition _ct];
+							['<t align=''left'' size=''0.5'' color=''#B80B36''>'+_log4+'</t>',safezoneX+0.2,safezoneY+0.545,0.3,0,0,3036] spawn bis_fnc_dynamicText;
+						
+							_log5 = format['Health: %1 - Distance: %2m',(1-(damage _ct))*100,round(cameraOn distance _ct)];
+							['<t align=''left'' size=''0.5'' color=''#B80B36''>'+_log5+'</t>',safezoneX+0.2,safezoneY+0.575,0.3,0,0,3037] spawn bis_fnc_dynamicText;
+						
+							['',0,0,1,0,0,3038] spawn bis_fnc_dynamicText;
+						};
+					
+						_vehCT = vehicle _ct;
+						if((_vehCT isKindOf 'LandVehicle') || (_vehCT isKindOf 'Air') || (_vehCT isKindOf 'Ship') || (_vehCT isKindOf 'Static'))then
+						{
+							_cwepsV = [];
+							{
+								if(_x find 'Horn' == -1)then
+								{
+									_cwepsV pushBack _x;
+								};
+							} forEach (weapons _vehCT);
+						
+							if(count _cwepsV > 0)then
+							{
+								_id = 3039;
+								_YPOS = safezoneY+0.655;
+							
+								{
+									_cwep = _x;
+									_cammo = _vehCT ammo _cwep;
+									_cmags = {currentMagazine _vehCT == _x} count magazines _vehCT;
+								
+									_type = _cwep;
+									_cfg = _type call fnc_getConfig;
+									_displayName = getText (configFile >> _cfg >> _type >> 'displayName');
+								
+									_log6a = format[' %1 [%2] (%3/%4)',_displayName,_cwep,_cammo,_cmags];
+									['<t align=''left'' size=''0.5'' color=''#A90F68''>'+_log6a+'</t>',safezoneX+0.2,_YPOS,0.3,0,0,_id] spawn bis_fnc_dynamicText;
+								
+									_id = _id + 1;
+									_YPOS = _YPOS + 0.03;
+								} forEach _cwepsV;
+							};
+						};
+					};
 				
 				if(isNil 'SpecateLoopActive')exitWith{};
 				uiSleep 0.2;
