@@ -153,7 +153,7 @@ class PlayersMenu
 		{
 			idc = -1;
 			text = "Remove All £";
-			onButtonClick = "[11] execVM 'client\systems\adminPanel\playerSelect.sqf'";
+			onButtonClick = "[5] execVM 'client\systems\adminPanel\playerSelect.sqf'";
 			x = 0.8125;
 			y = 0.48;
 			w = 0.1625;
@@ -208,7 +208,7 @@ class PlayersMenu
 		{
 			idc = -1;
 			text = "Kick Player";  //--- ToDo: Localize;			
-			onButtonClick = "[5] execVM 'client\systems\adminPanel\playerSelect.sqf'";
+			onButtonClick = "[11] execVM 'client\systems\adminPanel\playerSelect.sqf'";
 			x = 0.8125;
 			y = 0.64;
 			w = 0.1625;
