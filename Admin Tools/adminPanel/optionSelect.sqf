@@ -196,6 +196,11 @@ if (_uid call isAdmin) then
 					if(!isNil'camerathread')then{terminate camerathread;camerathread=nil;};
 					camerathread = [] spawn (uinamespace getvariable 'bis_fnc_camera');
 				};
+
+				case 26: //unlimited ammo
+				{
+					execVM "client\systems\adminPanel\tools\matt76_ammo.sqf";
+				};				
 			};
 		};
 	};

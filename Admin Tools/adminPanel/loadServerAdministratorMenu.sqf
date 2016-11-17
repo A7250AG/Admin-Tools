@@ -43,7 +43,8 @@ if ([_uid, 3] call isAdmin) then {
 	                "Load ATM Menu",
 	                "Toggle AI ESP",
 	                "Toggle Terrain Height",
-	                "BIS FreeRoam Cam (Pres ESCAPE to exit!! Do NOT press F1)"                
+	                "BIS FreeRoam Cam (Pres ESCAPE to exit!! Do NOT press F1)",
+	                "Unlimited Ammo"                
 	];
 
 	{
