@@ -8,7 +8,6 @@ _uid = getPlayerUID player;
 
 if (_uid call isAdmin) then {
 
-Matt76 = {
 	matts_rockets = 10;
 	matts_position = {
 		openMap[false, false];
@@ -32,8 +31,4 @@ Matt76 = {
 	openMap[true, false];	
 	CCGLogger = ["AdminLog", format["Admin called in an artillery strike [%1 (%2)]", name player, getPlayerUID player]];
 	publicVariableServer "CCGLogger";
-	};
-
-	[] spawn Matt76;
-
 };
