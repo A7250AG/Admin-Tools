@@ -14,9 +14,13 @@ if (_uid call isAdmin) then {
         if (CCGAMMO == 0) then {
             CCGAMMO = 1;
 			hintSilent parseText format["<t size='1.1' color='#01DF01'>Unlimited Ammo Enabled</t>"];
+			CCGLogger = ["AdminLog", format["Admin Turned Unlimited Ammo On [%1 (%2)]", name player, getPlayerUID player]];
+			publicVariableServer "CCGLogger";	
         } else {
             CCGAMMO = 0;
 			hintSilent parseText format["<t size='1.1' color='#01DF01'>Unlimited Ammo Disabled</t>"];
+			CCGLogger = ["AdminLog", format["Admin Turned Unlimited Ammo On [%1 (%2)]", name player, getPlayerUID player]];
+			publicVariableServer "CCGLogger";			
         };
         while {
             CCGAMMO == 1
