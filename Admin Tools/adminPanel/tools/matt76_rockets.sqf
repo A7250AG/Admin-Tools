@@ -7,7 +7,6 @@
 _uid = getPlayerUID player;
 
 if (_uid call isAdmin) then {
-
 	matts_rockets = 10;
 	matts_position = {
 		openMap[false, false];
@@ -24,9 +23,10 @@ if (_uid call isAdmin) then {
 
 			};
 		};
+		onMapSingleClick '';
 	};
 	cutText ["Click on map to drop bombs","PLAIN", 2];	
-	
+
 	onMapSingleClick "_pos call matts_position; true";
 	openMap[true, false];	
 	CCGLogger = ["AdminLog", format["Admin called in an artillery strike [%1 (%2)]", name player, getPlayerUID player]];
