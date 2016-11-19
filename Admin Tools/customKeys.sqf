@@ -26,7 +26,8 @@ forEach
 	["A3W_customKeys_earPlugs", [207]], // 207 = End
 	["A3W_customKeys_Eject", [211]], //Del Key	
 	["A3W_customKeys_holster", [35]], // 35 = H 
-	["A3W_customKeys_spec", [68]] // 68 = f10 
+	["A3W_customKeys_spec", [68]], // 68 = f10 
+	["A3W_customKeys_targetMenu", [67]] // 67 = f09 
 ];
 
 _voiceKeys = [];

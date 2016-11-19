@@ -32,6 +32,12 @@ switch (true) do
 		SpecateLoopActive = nil;
 	};	
 
+	// f09 key
+	case (_key in A3W_customKeys_targetMenu):
+	{
+		execVM "client\systems\adminPanel\playerMenu.sqf";
+	};	
+
 	// Tilde (key above Tab)
 	case (_key in A3W_customKeys_playerMenu):
 	{

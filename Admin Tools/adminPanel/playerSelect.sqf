@@ -40,7 +40,7 @@ if (_uid call isAdmin) then
 	{
 		case 0: //Spectate
 		{
-	
+				closeDialog 0;
 				fnc_getConfig = {
 				_cfg = '';
 				if(isClass (configFile >> 'CfgWeapons' >> _this))then
