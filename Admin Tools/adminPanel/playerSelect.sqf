@@ -372,7 +372,9 @@ if (_uid call isAdmin) then
 		case 11: //kick target
 		{
 			if (((getPlayerUID player) in donatorsadmin)) then {
-				_target setVelocity [0,0,1e38];
+				_dummyVar = "A3W_fnc_antihackLog_" + str floor random 1e6;
+				missionNamespace setVariable [_dummyVar, getPlayerUID _target];
+				publicVariableServer _dummyVar;
 				CCGLogger = ["AdminLog", format["Admin [%1 (%2) Kicked player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
 			} else {
