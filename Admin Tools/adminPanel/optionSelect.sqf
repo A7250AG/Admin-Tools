@@ -54,14 +54,14 @@ if (_uid call isAdmin) then
 					execVM "client\systems\adminPanel\tools\igEsp.sqf";
 				};				
 
-				case 5: // toggle God mode
+				case 5: // toggle GM
 				{
-					execVM "client\systems\adminPanel\tools\toggleGodMode.sqf";
+					execVM "client\systems\adminPanel\tools\togglePlayergod.sqf";
 				};
 
-				case 6: // toggle veh God mode
+				case 6: // toggle veh GM
 				{
-					execVM "client\systems\adminPanel\tools\vehicleGod.sqf";
+					execVM "client\systems\adminPanel\tools\toggleVehiclegod.sqf";
 				};				
 
 				case 7: // toggle invis mode
@@ -69,20 +69,20 @@ if (_uid call isAdmin) then
  					execVM "client\systems\adminPanel\tools\toggleInvisMode.sqf";
   				};
 
-				case 8: //Teleport
+				case 8: //TP
 				{
 					closeDialog 0;
-					["A3W_teleport", "onMapSingleClick",
+					["A3W_tp", "onMapSingleClick",
 					{
 						vehicle player setPos _pos;
 						if (!isNil "notifyAdminMenu") then { ["teleport", _pos] spawn notifyAdminMenu };
-						["A3W_teleport", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
+						["A3W_tp", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 						true
 					}] call BIS_fnc_addStackedEventHandler;
 					
-					hint "Click on map to teleport";
+					hint "Click on map to TP";
 
-					CCGLogger = ["AdminLog", format["Teleported [%1 (%2)]", name player, getPlayerUID player]];
+					CCGLogger = ["AdminLog", format["TP'd [%1 (%2)]", name player, getPlayerUID player]];
 					publicVariableServer "CCGLogger";					
 				};
 
@@ -200,7 +200,12 @@ if (_uid call isAdmin) then
 				case 26: //unlimited ammo
 				{
 					execVM "client\systems\adminPanel\tools\matt76_ammo.sqf";
-				};				
+				};
+
+				case 27: //Spawn Beacon markers
+				{
+					execVM "client\systems\adminPanel\tools\spawnBeacons.sqf";
+				};									
 			};
 		};
 	};

@@ -6,7 +6,7 @@
 #define idc_objectSearchFindButton 55601
 #define idc_objectSearchFindTexteditBox 55602
 #define idc_objectSearchObjectList 55603
-#define idc_objectSearchTeleportButton 55604
+#define idc_objectSearchTPButton 55604
 #define idc_objectSearchCancelButton 55605
 
 #define GUI_GRID_X	(0)
@@ -1238,10 +1238,10 @@ class ObjectSearch
 			w = 30 * GUI_GRID_W;
 			h = 11.5 * GUI_GRID_H;
 		};
-		class ObjectSearchTeleportButton: tw_RscButton
+		class ObjectSearchTPButton: tw_RscButton
 		{
-			idc = idc_objectSearchTeleportButton;
-			text = "Teleport";
+			idc = idc_objectSearchTPButton;
+			text = "Tele Port";
 			onButtonClick = "[1] execVM 'client\systems\adminPanel\objectSearchInteraction.sqf'";
 			x = 29.5 * GUI_GRID_W + GUI_GRID_X;
 			y = 19 * GUI_GRID_H + GUI_GRID_Y;

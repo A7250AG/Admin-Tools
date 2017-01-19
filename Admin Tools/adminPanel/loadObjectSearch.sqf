@@ -5,7 +5,7 @@
 #define objectSearchFindButton 55601
 #define objectSearchFindTexteditBox 55602
 #define objectSearchObjectList 55603
-#define objectSearchTeleportButton 55604
+#define objectSearchTPButton 55604
 #define objectSearchCancelButton 55605
 
 disableSerialization;

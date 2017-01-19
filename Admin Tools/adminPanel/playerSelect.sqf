@@ -332,9 +332,9 @@ if (_uid call isAdmin) then
 			if (((getPlayerUID player) in donatorsadmin)) then {
 				vehicle player setPosASL (getPosASL _target);	
 				diag_log format ["DEBUG: Admin 1% Player %2", name player, name _target];
-				hint format ["Teleported to %1", name _target];
+				hint format ["You TP'd to %1", name _target];
 				closeDialog 0;
-				CCGLogger = ["AdminLog", format["Admin[%1 (%2) Teleported to player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+				CCGLogger = ["AdminLog", format["Admin[%1 (%2) TP'd to player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
 			} else {
 				closeDialog 0;
@@ -346,9 +346,9 @@ if (_uid call isAdmin) then
 			if (((getPlayerUID player) in donatorsadmin)) then {
 				vehicle _target setPosASL (getPosASL player);
 				diag_log format ["DEBUG: _target %1 admin %2", name _target, name player];
-				hint format ["Teleporting %1", name _target];
+				hint format ["TP player %1 to Admin", name _target];
 				closeDialog 0;
-				CCGLogger = ["AdminLog", format["Player [%1 (%2) teleport to admin %3 (%4)]", name _target, getPlayerUID _target, name player, getPlayerUID player]];
+				CCGLogger = ["AdminLog", format["Player [%1 (%2) TP'd to admin %3 (%4)]", name _target, getPlayerUID _target, name player, getPlayerUID player]];
 				publicVariableServer "CCGLogger";
 			} else {
 				closeDialog 0;

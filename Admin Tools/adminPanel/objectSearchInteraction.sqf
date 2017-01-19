@@ -7,15 +7,15 @@
 #define objectSearchFindButton 55601
 #define objectSearchFindTexteditBox 55602
 #define objectSearchObjectList 55603
-#define objectSearchTeleportButton 55604
+#define objectSearchTPButton 55604
 #define objectSearchCancelButton 55605
 
 #define OBJECT_SEARCH_ACTION_FIND 0
-#define OBJECT_SEARCH_ACTION_TELEPORT 1
+#define OBJECT_SEARCH_ACTION_TP 1
 #define OBJECT_SEARCH_ACTION_CLEAR_MAP 2
 
 // Limit to 1000m to stop this being crazy laggy
-#define OBJECT_SEARCH_RADIUS 1000
+#define OBJECT_SEARCH_RADIUS 2000
 
 disableSerialization;
 
@@ -72,7 +72,7 @@ if (_uid call isAdmin) then
 				player globalChat format["Added %1 entries on the map", count _objects];
 			};
 		};
-		case OBJECT_SEARCH_ACTION_TELEPORT:
+		case OBJECT_SEARCH_ACTION_TP:
 		{
 			private ["_index", "_positionStr", "_objPos", "_safePos", "_playerPos", "_vector"];
 			_index = lbCurSel _objectListBoxCtrl;
@@ -91,9 +91,8 @@ if (_uid call isAdmin) then
 			_newPlayerPos = getPosATL player;
 			_dir = [player, _objPos] call BIS_fnc_dirTo;
 			player setDir _dir;
-			player globalChat "Teleported to your object";
-
-			CCGLogger = ["AdminLog", format["Teleported to Object [%1 (%2)]", name player, getPlayerUID player]];
+			
+			CCGLogger = ["AdminLog", format["Admin TP to Object [%1 (%2)]", name player, getPlayerUID player]];
 			publicVariableServer "CCGLogger";
 		};
 		case OBJECT_SEARCH_ACTION_CLEAR_MAP:

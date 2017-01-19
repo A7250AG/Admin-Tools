@@ -26,7 +26,7 @@ if ([_uid, 3] call isAdmin) then {
 					"Toggle God-mode",
 					"Toggle Vehicle God-mode",
 					"Toggle Invisible-mode",
-					"Map Teleport",
+					"TP Somewhere (Open the map and Click on it to TP)",
 	                "Unlock all Objects 60m around you",
 	                "Delete all Unlocked Objects 60m around you",
 	                "Relock all Objects 60m around you",
@@ -44,7 +44,8 @@ if ([_uid, 3] call isAdmin) then {
 	                "Toggle AI ESP",
 	                "Toggle Terrain Height",
 	                "BIS FreeRoam Cam (Pres ESCAPE to exit!! Do NOT press F1)",
-	                "Unlimited Ammo"                
+	                "Unlimited Ammo", 
+	                "Toggle Spawn Beacon Map Markers"               
 	];
 
 	{

@@ -11,7 +11,7 @@ class MarkerLog
 	idd = markerLogDialog;
 	movingEnable = false;
 	enableSimulation = true;
-	onLoad = "execVM 'client\systems\adminPanel\markerLog.sqf'";
+	onLoad = "execVM 'client\systems\adminPanel\tools\markerLog.sqf'";
 
 	class controlsBackground {
 
