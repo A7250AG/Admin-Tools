@@ -12,9 +12,9 @@ if (_uid call isAdmin) then {
 		{
 			while {Matt76spawnbeacons == 1} do
 			{
-				{
+				{					
+					_owner = _x getVariable ["ownerName", ""];
 					_xPos = getPos _x;
-					
 					_cm = ('CCGsbMarkers' + (str _forEachIndex));
 					_pos = getMarkerPos _cm;
 					if((_pos select 0 != _xPos select 0) || (_pos select 1 != _xPos select 1))then
@@ -24,7 +24,8 @@ if (_uid call isAdmin) then {
 						_vm setMarkerDirLocal (getDir _x);
 						_vm setMarkerTypeLocal 'mil_start';
 						_vm setMarkerColorLocal 'ColorBlack';
-						_vm setMarkerTextLocal format['Spawn Beacon'];
+						_vm setMarkerTextLocal format['Spawn Beacon placed by %1',_owner];
+
 					};
 					if(Matt76spawnbeacons == 0)exitWith{};
 				} forEach nearestObjects [position player, ['Land_Tentdome_F'], 100000];
