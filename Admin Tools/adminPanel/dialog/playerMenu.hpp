@@ -174,7 +174,7 @@ class PlayersMenu
 		class CheckPlayerGearButton: w_RscButton
 		{
 			idc = -1;
-			text = "Remove 25k";
+			text = "Eject Player";
 			onButtonClick = "[7] execVM 'client\systems\adminPanel\playerSelect.sqf'";
 			x = 0.6125;
 			y = 0.64;

@@ -243,9 +243,8 @@ if (_uid call isAdmin) then
 				_warnText = ctrlText _warnMessage;
 				_playerName = name player;
 				[format ["Message from Admin: %1", _warnText], "A3W_fnc_titleTextMessage", _target, false] call A3W_fnc_MP;
-				["PlayerMgmt_Warn", format ["%1 (%2) - %3", name _target, getPlayerUID _target, _warnText]] call notifyAdminMenu;
-						CCGLogger = ["AdminLog", format["Message from Admin [Admin = %1 - %2 (Player = %3 - %4) - %5)]", name player, getPlayerUID player, name _target, getPlayerUID _target, _warnText]];
-						publicVariableServer "CCGLogger";			
+				CCGLogger = ["AdminLog", format["Message from Admin [Admin = %1 - %2 (Player = %3 - %4) - %5)]", name player, getPlayerUID player, name _target, getPlayerUID _target, _warnText]];
+				publicVariableServer "CCGLogger";
 			};
 			case 2: //Slay
 			{
@@ -254,28 +253,22 @@ if (_uid call isAdmin) then
 					_target setVariable ["A3W_deathCause_remote", ["forcekill",serverTime], true];
 					_target setDamage 1;
 				};
-
 				CCGLogger = ["AdminLog", format["Admin Slayed Player [Admin = %1 - %2 (Player = %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-				publicVariableServer "CCGLogger";	
+				publicVariableServer "CCGLogger";
 			};
 			case 3: //Unlock Team Switcher
 			{
 				pvar_teamSwitchUnlock = getPlayerUID _target;
 				publicVariableServer "pvar_teamSwitchUnlock";
-				["PlayerMgmt_UnlockTeamSwitch", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
-
 				CCGLogger = ["AdminLog", format["Admin PlayerMgmt_UnlockTeamSwitch [Admin = %1 - %2 (Player = %2 - %3)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
-
 			};
 			case 4: //Unlock Team Killer
 			{
 				pvar_teamKillUnlock = getPlayerUID _target;
 				publicVariableServer "pvar_teamKillUnlock";
-				["PlayerMgmt_UnlockTeamKill", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
-
 				CCGLogger = ["AdminLog", format["Admin PlayerMgmt_UnlockTeamKill [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-				publicVariableServer "CCGLogger";			
+				publicVariableServer "CCGLogger";
 			};
 			case 5: //Remove All Money
 			{
@@ -286,11 +279,8 @@ if (_uid call isAdmin) then
 						_x setVariable["cmoney",0,true];
 					};
 				}forEach playableUnits;
-				["PlayerMgmt_RemoveMoney", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
-
 				CCGLogger = ["AdminLog", format["Removed all Money from player by [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
-
 			};
 			case 6: //Remove 10K
 			{
@@ -305,73 +295,56 @@ if (_uid call isAdmin) then
 						_x setVariable ["cmoney", _playerMoney - _fine, true];
 					};
 				}forEach playableUnits;
-				["PlayerMgmt_RemoveMoney", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
-
 				CCGLogger = ["AdminLog", format["Removed 10k from player by [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
-
 			};
-			case 7: //Remove 25k
+			case 7: //Eject Player from a vehicle
 			{
-				_targetUID = getPlayerUID _target;
-				{
-					if(getPlayerUID _x == _targetUID) exitWith
-					{
-						_fine = 25000;
-						_playerMoney = _x getVariable ["cmoney", 0];
-						_x setVariable ["cmoney", _playerMoney - _fine, true];
-					};
-				}forEach playableUnits;
-				["PlayerMgmt_RemoveMoney", format ["%1 (%2)", name _target, getPlayerUID _target]] call notifyAdminMenu;
-
-				CCGLogger = ["AdminLog", format["Removed 25k from player by [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+				doGetOut _target;
+				CCGLogger = ["AdminLog", format["Admin Ejected Player from a vehicle [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
 			};
 			case 8: //TP to player
 			{
-					vehicle player setPosASL (getPosASL _target);	
-					diag_log format ["DEBUG: Admin 1% Player %2", name player, name _target];
-					hint format ["You TP'd to %1", name _target];
-					closeDialog 0;
-					CCGLogger = ["AdminLog", format["Admin[%1 (%2) TP'd to player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-					publicVariableServer "CCGLogger";
-					closeDialog 0;							
+				vehicle player setPosASL (getPosASL _target);	
+				hint format ["You TP'd to %1", name _target];
+				_gridPos = mapGridPosition getPos _target;
+				CCGLogger = ["AdminLog", format["Admin[%1 (%2) TP'd to player %3 (%4) at GPS Position %5]", name player, getPlayerUID player, name _target, getPlayerUID _target, _gridPos]];
+				publicVariableServer "CCGLogger";
+				closeDialog 0;											
 			};
 			case 9: //TP to Admin
 			{
-					vehicle _target setPosASL (getPosASL player);
-					diag_log format ["DEBUG: _target %1 admin %2", name _target, name player];
-					hint format ["TP player %1 to Admin", name _target];
-					closeDialog 0;
-					CCGLogger = ["AdminLog", format["Player [%1 (%2) TP'd to admin %3 (%4)]", name _target, getPlayerUID _target, name player, getPlayerUID player]];
-					publicVariableServer "CCGLogger";
-					closeDialog 0;					
+				vehicle _target setPosASL (getPosASL player);
+				hint format ["TP player %1 to Admin", name _target];
+				_gridPos = mapGridPosition getPos player;
+				CCGLogger = ["AdminLog", format["Player [%1 (%2) TP'd to admin %3 (%4) at GPS Position %5]", name _target, getPlayerUID _target, name player, getPlayerUID player, _gridPos]];
+				publicVariableServer "CCGLogger";
+				closeDialog 0;									
 			};	
 			case 10: //Heal target
 			{
-					_target setDamage 0;
-					diag_log format ["DEBUG: Healed _target %1 by admin %2", name _target, name player];
-					hint format ["Healing target player %1", name _target];
-					CCGLogger = ["AdminLog", format["Admin [%1 (%2) Healed player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-					publicVariableServer "CCGLogger";
-					closeDialog 0;									
+				_target setDamage 0;
+				hint format ["Healing target player %1", name _target];
+				CCGLogger = ["AdminLog", format["Admin [%1 (%2) Healed player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+				publicVariableServer "CCGLogger";
+				closeDialog 0;									
 			};
-
 			case 11: //kick target
 			{
-					CCGLogger = ["AdminLog", format["Admin [%1 (%2) Kicked player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-					publicVariableServer "CCGLogger";
-					_dummyVar = "A3W_fnc_antihackLog_" + str floor random 1e6;
-					missionNamespace setVariable [_dummyVar, getPlayerUID _target];
-					publicVariableServer _dummyVar;
-					closeDialog 0;									
+				CCGLogger = ["AdminLog", format["Admin [%1 (%2) Kicked player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+				publicVariableServer "CCGLogger";
+				_dummyVar = "A3W_fnc_antihackLog_" + str floor random 1e6;
+				missionNamespace setVariable [_dummyVar, getPlayerUID _target];
+				publicVariableServer _dummyVar;
+				closeDialog 0;									
 			};
 			case 12: //Cock Head
 			{
-					_expl1 = "Cock_random_F" createVehicle position _target; _expl1 attachTo [_target, [-0.1, 0.1, 0.15], "Head"]; _expl1 setVectorDirAndUp [ [0.5, 0.5, 0], [-0.5, 0.5, 0] ];
-					CCGLogger = ["AdminLog", format["Admin [%1 (%2) attached a Cock to a players head !! %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-					publicVariableServer "CCGLogger";
-					closeDialog 0;				
+				_expl1 = "Cock_random_F" createVehicle position _target; _expl1 attachTo [_target, [-0.1, 0.1, 0.15], "Head"]; _expl1 setVectorDirAndUp [ [0.5, 0.5, 0], [-0.5, 0.5, 0] ];
+				CCGLogger = ["AdminLog", format["Admin [%1 (%2) attached a Cock to a players head !! %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+				publicVariableServer "CCGLogger";
+				closeDialog 0;				
 			};			
 		};
 };

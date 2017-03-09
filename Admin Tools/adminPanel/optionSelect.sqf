@@ -72,18 +72,7 @@ if (_uid call isAdmin) then
 				case 8: //TP
 				{
 					closeDialog 0;
-					["A3W_tp", "onMapSingleClick",
-					{
-						vehicle player setPos _pos;
-						if (!isNil "notifyAdminMenu") then { ["teleport", _pos] spawn notifyAdminMenu };
-						["A3W_tp", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
-						true
-					}] call BIS_fnc_addStackedEventHandler;
-					
-					hint "Click on map to TP";
-
-					CCGLogger = ["AdminLog", format["TP'd [%1 (%2)]", name player, getPlayerUID player]];
-					publicVariableServer "CCGLogger";					
+					execVM "client\systems\adminPanel\tools\adminTP.sqf";				
 				};
 
      			case 9: //Unlock Base Objects within 60m
@@ -147,7 +136,7 @@ if (_uid call isAdmin) then
 					SystemChat "Vehicle Fixed!";
 					CCGLogger = ["AdminLog", format["Repaired Cursor target [%1 (%2/%3)]", typeOf _veh2, name player, getPlayerUID player]];
 					publicVariableServer "CCGLogger";									
-				};				
+				};
 
 				case 18: //matt76_rockets
 				{
