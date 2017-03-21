@@ -300,7 +300,7 @@ if (_uid call isAdmin) then
 			};
 			case 7: //Eject Player from a vehicle
 			{
-				doGetOut _target;
+				moveOut _target;
 				CCGLogger = ["AdminLog", format["Admin Ejected Player from a vehicle [Admin = %1 - %2 (Player= %3 - %4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
 				publicVariableServer "CCGLogger";
 			};
