@@ -331,12 +331,19 @@ if (_uid call isAdmin) then
 				closeDialog 0;									
 			};
 			case 11: //kick target
-			{
-				CCGLogger = ["AdminLog", format["Admin [%1 (%2) Kicked player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
-				publicVariableServer "CCGLogger";
-				_dummyVar = "A3W_fnc_antihackLog_" + str floor random 1e6;
-				missionNamespace setVariable [_dummyVar, getPlayerUID _target];
-				publicVariableServer _dummyVar;
+			{				
+				_targetUID = getPlayerUID _target;				
+				{
+					if(getPlayerUID _x == _targetUID) exitWith
+					{
+						_dummyVar = "A3W_fnc_antihackLog_" + str floor random 1e6;	
+						missionNamespace setVariable [_dummyVar, _targetUID];
+						publicVariableServer _dummyVar;
+						CCGLogger = ["AdminLog", format["Admin [%1 (%2) Kicked player %3 (%4)]", name player, getPlayerUID player, name _target, getPlayerUID _target]];
+						publicVariableServer "CCGLogger";						
+
+					};
+				}forEach playableUnits;
 				closeDialog 0;									
 			};
 			case 12: //Cock Head
